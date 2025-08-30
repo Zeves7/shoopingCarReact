@@ -11,13 +11,48 @@ export function useLocalStorage<T>(key: string, initialValue: T) {
     }
   });
 
-  useEffect(() => {
+  const setValue = (value: T | ((val: T) => T)) => {
     try {
-      localStorage.setItem(key, JSON.stringify(storedValue));
+      const valueToStore =
+        value instanceof Function ? value(storedValue) : value;
+      setStoredValue(valueToStore);
+      localStorage.setItem(key, JSON.stringify(valueToStore));
+
+      // 🔹 Notificar a otras instancias en la misma pestaña
+      window.dispatchEvent(
+        new CustomEvent("localstorage-update", {
+          detail: { key, value: valueToStore },
+        })
+      );
     } catch (error) {
       console.error("Error guardando en localStorage", error);
     }
-  }, [key, storedValue]);
+  };
 
-  return [storedValue, setStoredValue] as const;
+  useEffect(() => {
+    const handleStorageChange = (event: StorageEvent) => {
+      if (event.key === key && event.newValue) {
+        setStoredValue(JSON.parse(event.newValue));
+      }
+    };
+
+    const handleCustomEvent = (event: Event) => {
+      const custom = event as CustomEvent;
+      if (custom.detail.key === key) {
+        setStoredValue(custom.detail.value);
+      }
+    };
+
+    // Escucha cambios de otras pestañas
+    window.addEventListener("storage", handleStorageChange);
+    // Escucha cambios en la misma pestaña
+    window.addEventListener("localstorage-update", handleCustomEvent);
+
+    return () => {
+      window.removeEventListener("storage", handleStorageChange);
+      window.removeEventListener("localstorage-update", handleCustomEvent);
+    };
+  }, [key]);
+
+  return [storedValue, setValue] as const;
 }

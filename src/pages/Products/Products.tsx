@@ -14,7 +14,7 @@ export function Products() {
   };
 
   return (
-    <div className="container py-4">
+    <div className="py-4">
       <h1 className="mb-4">Productos</h1>
       <ProductsList apiUrl={apiUrl} onAddToCart={handleAddToCart} />
     </div>

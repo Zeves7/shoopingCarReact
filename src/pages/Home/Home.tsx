@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 export function Home() {
   return (
-    <div className="container py-5">
+    <div className="py-5">
       <div className="text-center mb-5">
         <h1 className="display-4 fw-bold">Bienvenido a Mi Tienda</h1>
         <p className="lead text-muted">

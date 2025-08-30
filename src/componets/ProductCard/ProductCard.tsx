@@ -1,4 +1,5 @@
 import type { Product } from "../../types/product";
+import { Link } from "react-router-dom";
 
 interface ProductCardProps {
   product: Product;
@@ -19,12 +20,22 @@ export function ProductCard({ product, onAddToCart }: ProductCardProps) {
         <p className="card-text fw-bold text-primary">
           ${product.price.toFixed(2)}
         </p>
-        <button
-          className="btn btn-success mt-auto"
-          onClick={() => onAddToCart(product)}
-        >
-          🛒 Agregar al carrito
-        </button>
+
+        <div className="mt-auto d-flex flex-column gap-2">
+          <button
+            className="btn btn-success"
+            onClick={() => onAddToCart(product)}
+          >
+            🛒 Agregar al carrito
+          </button>
+
+          <Link
+            to={`/products/${product.id}`}
+            className="btn btn-outline-primary"
+          >
+            🔍 Ver detalles
+          </Link>
+        </div>
       </div>
     </div>
   );

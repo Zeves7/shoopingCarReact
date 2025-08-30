@@ -1,9 +1,11 @@
+import { Link } from "react-router-dom";
+
 export function Footer() {
   return (
     <footer className="bg-dark text-light py-4 mt-auto">
       <div className="container">
         <div className="row">
-          {/* Columna 1: Nombre o logo */}
+          {/* Columna 1 */}
           <div className="col-md-4 mb-3 mb-md-0">
             <h5 className="fw-bold">🛍️ Mi Tienda</h5>
             <p className="small">
@@ -11,17 +13,17 @@ export function Footer() {
             </p>
           </div>
 
-          {/* Columna 2: Enlaces rápidos */}
+          {/* Columna 2 */}
           <div className="col-md-4 mb-3 mb-md-0">
             <h6 className="fw-bold">Enlaces</h6>
             <ul className="list-unstyled">
-              <li><a href="#" className="text-light text-decoration-none">Inicio</a></li>
-              <li><a href="#" className="text-light text-decoration-none">Productos</a></li>
-              <li><a href="#" className="text-light text-decoration-none">Contacto</a></li>
+              <li><Link to="/" className="text-light text-decoration-none">Inicio</Link></li>
+              <li><Link to="/products" className="text-light text-decoration-none">Productos</Link></li>
+              <li><Link to="/contact" className="text-light text-decoration-none">Contacto</Link></li>
             </ul>
           </div>
 
-          {/* Columna 3: Redes sociales */}
+          {/* Columna 3 */}
           <div className="col-md-4">
             <h6 className="fw-bold">Síguenos</h6>
             <div className="d-flex gap-3">
@@ -34,7 +36,6 @@ export function Footer() {
 
         <hr className="border-light my-3" />
 
-        {/* Derechos de autor */}
         <div className="text-center small">
           &copy; {new Date().getFullYear()} Mi Tienda. Todos los derechos reservados.
         </div>
