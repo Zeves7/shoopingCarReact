@@ -12,8 +12,8 @@ export default function App() {
       <div className="d-flex flex-column min-vh-100">
         <Header />
 
-        <main className="flex-fill">
-        <div className="container py-4">
+        <main className="flex-fill d-flex justify-content-center">
+        <div className="container py-4 text-center">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/products" element={<Products />} />
