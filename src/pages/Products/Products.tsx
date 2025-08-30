@@ -1,18 +1,22 @@
-import { useState } from "react";
-import { ProductsList } from "../../componets"
+
+import { ProductsList } from "../../componets";
+import { useCart } from "../../hooks/useCart/useCart";
 import type { Product } from "../../types/product";
 
 export function Products() {
-  const [cart, setCart] = useState<Product[]>([]);
+  const { addToCart } = useCart();
+
+  //  URL de la API
+  const apiUrl = "https://fakestoreapi.com/products"; 
 
   const handleAddToCart = (product: Product) => {
-    setCart((prev) => [...prev, product]);
+    addToCart(product);
   };
 
   return (
-    <ProductsList
-      apiUrl="https://fakestoreapi.com/products"
-      onAddToCart={handleAddToCart}
-    />
+    <div className="container py-4">
+      <h1 className="mb-4">Productos</h1>
+      <ProductsList apiUrl={apiUrl} onAddToCart={handleAddToCart} />
+    </div>
   );
 }
