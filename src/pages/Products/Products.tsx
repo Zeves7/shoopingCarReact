@@ -1,8 +1,18 @@
+import { useState } from "react";
+import { ProductsList } from "../../componets"
+import type { Product } from "../../types/product";
+
 export function Products() {
+  const [cart, setCart] = useState<Product[]>([]);
+
+  const handleAddToCart = (product: Product) => {
+    setCart((prev) => [...prev, product]);
+  };
+
   return (
-    <div className="container py-4">
-      <h1 className="mb-4">Productos</h1>
-      <p>Aquí listaremos todos los productos disponibles.</p>
-    </div>
+    <ProductsList
+      apiUrl="https://fakestoreapi.com/products"
+      onAddToCart={handleAddToCart}
+    />
   );
 }

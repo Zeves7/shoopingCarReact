@@ -1,4 +1,4 @@
-import { Product } from "../../assets/hooks/useProducts/useProducts";
+import type { Product } from "../../types/product";
 
 interface ProductCardProps {
   product: Product;
